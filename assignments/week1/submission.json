@@ -2,13 +2,11 @@
     "assignment_name": "Assignment 1",
     "contributors": [
         {
-            "name": "Jordan Matelsky",
-            "pennkey": "matelsky"
+            "name": "Meet Gandhi",
+            "pennkey": "mgandhi5"
         }
     ],
     "sources": [
-        "https://example.com",
-        "Conversations with TA (include TA's name)",
-        "LLM (include information about the LLM and how it was used)"
+        "Did not take help from anywhere for this assignment"
     ]
 }
