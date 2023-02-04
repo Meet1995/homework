@@ -3,6 +3,18 @@ from typing import Callable
 
 
 class MLP(torch.nn.Module):
+    """
+    Initialize the MLP.
+    Args:
+        input_size (int): The dimension D of the input data.
+        hidden_size (int): The number of neurons H in the hidden layer.
+        num_classes (int): The number of classes C.
+        hidden_count (int, optional): The number of hidden layers. Defaults to 1.
+        activation (Callable, optional): The activation function to use in the
+        hidden layer. Defaults to torch.nn.ReLU.
+        initializer (Callable, optional): The initializer to use for the weights.
+        Defaults to initializer.
+    """
     def __init__(
         self,
         input_size: int,
@@ -12,18 +24,6 @@ class MLP(torch.nn.Module):
         activation: Callable = torch.nn.ReLU,
         initializer: Callable = torch.nn.init.ones_,
     ) -> None:
-        """
-        Initialize the MLP.
-        Args:
-            input_size (int): The dimension D of the input data.
-            hidden_size (int): The number of neurons H in the hidden layer.
-            num_classes (int): The number of classes C.
-            hidden_count (int, optional): The number of hidden layers. Defaults to 1.
-            activation (Callable, optional): The activation function to use in the
-            hidden layer. Defaults to torch.nn.ReLU.
-            initializer (Callable, optional): The initializer to use for the weights.
-            Defaults to initializer.
-        """
         super().__init__()
 
         self.actv = activation()
@@ -56,7 +56,7 @@ class MLP(torch.nn.Module):
 
             self.layers = torch.nn.ModuleList([layer])
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the network.
 
