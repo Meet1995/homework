@@ -15,6 +15,7 @@ class MLP(torch.nn.Module):
         initializer (Callable, optional): The initializer to use for the weights.
         Defaults to initializer.
     """
+
     def __init__(
         self,
         input_size: int,
