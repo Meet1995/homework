@@ -1,5 +1,5 @@
 import torch
-from typing import Callable
+from typing import Callable, Union
 
 
 class MLP(torch.nn.Module):
@@ -7,55 +7,54 @@ class MLP(torch.nn.Module):
     Initialize the MLP.
     Args:
         input_size (int): The dimension D of the input data.
-        hidden_size (int): The number of neurons H in the hidden layer.
+        hidden_size (Union[int, list]): The number of units K in every layer.
+        For interger input, three layers with 64 units are created.
         num_classes (int): The number of classes C.
-        hidden_count (int, optional): The number of hidden layers. Defaults to 1.
+        hidden_count (int, optional): The number of units in the final hidden layer.
         activation (Callable, optional): The activation function to use in the
-        hidden layer. Defaults to torch.nn.ReLU.
+        hidden layer. Defaults to torch.nn.LeakyReLU.
         initializer (Callable, optional): The initializer to use for the weights.
-        Defaults to initializer.
+        Defaults to torch.nn.init.xavier_normal_.
     """
 
     def __init__(
         self,
         input_size: int,
-        hidden_size: int,
+        hidden_size: Union[int, list],
         num_classes: int,
-        hidden_count: int = 1,
-        activation: Callable = torch.nn.ReLU,
-        initializer: Callable = torch.nn.init.ones_,
+        hidden_count: int = 64,
+        activation: Callable = torch.nn.LeakyReLU,
+        initializer: Callable = torch.nn.init.xavier_normal_,
     ) -> None:
         super().__init__()
 
         self.actv = activation()
+        self.initializer = initializer
+        if isinstance(hidden_size, int):
+            hidden_size = [64] * 3
 
-        if hidden_count >= 2:
-            self.layers = torch.nn.ModuleList()
-            for i in range(hidden_count):
-                if i == 0:
-                    layer = torch.nn.Linear(input_size, hidden_size)
-                elif i == hidden_count - 1:
-                    layer = torch.nn.Linear(hidden_size, num_classes)
-                else:
-                    layer = torch.nn.Linear(hidden_size, hidden_size)
+        c1, c2, c3 = hidden_size
 
-                initializer(layer.weight)
-                self.layers += [layer]
+        self.layers = torch.nn.Sequential(
+            torch.nn.Conv2d(1, c1, 3),
+            activation(),
+            torch.nn.MaxPool2d(2),
+            torch.nn.Conv2d(c1, c2, 3),
+            activation(),
+            torch.nn.MaxPool2d(2),
+            torch.nn.Conv2d(c2, c3, 3),
+            activation(),
+            torch.nn.MaxPool2d(2),
+            torch.nn.Flatten(),
+            torch.nn.Linear(c3, hidden_count),
+            activation(),
+            torch.nn.Linear(hidden_count, num_classes),
+        )
+        self.layers.apply(self._init_weights)
 
-        elif hidden_count == 1:
-            input_layer = torch.nn.Linear(input_size, hidden_size)
-            initializer(input_layer.weight)
-
-            output_layer = torch.nn.Linear(hidden_size, num_classes)
-            initializer(output_layer.weight)
-
-            self.layers = torch.nn.ModuleList([input_layer, output_layer])
-
-        elif hidden_count == 0:
-            layer = torch.nn.Linear(input_size, num_classes)
-            initializer(layer.weight)
-
-            self.layers = torch.nn.ModuleList([layer])
+    def _init_weights(self, layer):
+        if isinstance(layer, (torch.nn.Linear, torch.nn.Conv2d)):
+            self.initializer(layer.weight)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -67,7 +66,4 @@ class MLP(torch.nn.Module):
         Returns:
             The output of the network.
         """
-        for layer in self.layers:
-            x = layer(x)
-            x = self.actv(x)
-        return x
+        return self.layers(x.reshape(-1, 1, 28, 28))
