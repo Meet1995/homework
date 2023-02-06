@@ -62,7 +62,6 @@ class MLP(torch.nn.Module):
             self.layers = torch.nn.ModuleList([layer])
 
         self.layers.apply(self._init_weights)
-        print("**")
 
     def _init_weights(self, layer):
         if isinstance(layer, torch.nn.Linear):
