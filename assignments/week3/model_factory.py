@@ -35,7 +35,7 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         input_dim,
         [64, 64, 64],
         output_dim,
-        64,
+        32,
         torch.nn.PReLU,
         torch.nn.init.xavier_normal_,
     )
