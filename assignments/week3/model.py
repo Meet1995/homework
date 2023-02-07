@@ -43,16 +43,16 @@ class MLP(torch.nn.Module):
 
                 self.layers += [
                     layer,
-                    self.actv,
                     torch.nn.BatchNorm1d(out_size, momentum=0.1),
+                    self.actv,
                 ]
 
         elif hidden_count == 1:
             self.layers = torch.nn.ModuleList(
                 [
                     torch.nn.Linear(input_size, hidden_size),
-                    self.actv,
                     torch.nn.BatchNorm1d(hidden_size, momentum=0.1),
+                    self.actv,
                     torch.nn.Linear(hidden_size, num_classes),
                 ]
             )
