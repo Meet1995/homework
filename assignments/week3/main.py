@@ -150,5 +150,5 @@ def main():
 
 
 if __name__ == "__main__":
-    torch.manual_seed(0)
+    torch.manual_seed(272023)
     main()
