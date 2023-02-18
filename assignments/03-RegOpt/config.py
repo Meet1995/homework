@@ -9,9 +9,9 @@ class CONFIG:
     batch_size = 390
     num_epochs = 17
     initial_weight_decay = 1e-5
-    batches_per_epoch = int(50000/batch_size)
+    batches_per_epoch = int(50000 / batch_size)
     if 50000 % batch_size != 0:
-        batches_per_epoch = int(50000/batch_size) + 1
+        batches_per_epoch = int(50000 / batch_size) + 1
 
     lrs_kwargs = {
         "max_lr": 0.0095,
@@ -19,9 +19,9 @@ class CONFIG:
         "final_lr_div": 500,
         "n_epochs": num_epochs,
         "batches_per_epoch": batches_per_epoch,
-        "cycle_perct": 0.96
+        "cycle_perct": 0.96,
     }
-    initial_learning_rate = lrs_kwargs['max_lr']/lrs_kwargs['ini_lr_div']
+    initial_learning_rate = lrs_kwargs["max_lr"] / lrs_kwargs["ini_lr_div"]
 
     optimizer_factory: Callable[
         [nn.Module], torch.optim.Optimizer
