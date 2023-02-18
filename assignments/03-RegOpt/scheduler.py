@@ -18,6 +18,7 @@ class CustomLRScheduler(_LRScheduler):
         considered for cycle
         last_epoch (int, optional): Used to reinitialize scheduler. Defaults to -1.
     """
+
     def __init__(
         self,
         optimizer: _LRScheduler,
@@ -30,8 +31,8 @@ class CustomLRScheduler(_LRScheduler):
         last_epoch: int = -1,
     ):
         self.max_lr = max_lr
-        self.ini_lr = max_lr/ini_lr_div
-        self.final_lr = self.ini_lr/final_lr_div
+        self.ini_lr = max_lr / ini_lr_div
+        self.final_lr = self.ini_lr / final_lr_div
         self.n_epochs = n_epochs
         self.batches_per_epoch = batches_per_epoch
         self.cycle_perct = cycle_perct
