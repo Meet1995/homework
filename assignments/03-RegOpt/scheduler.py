@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List
+from typing import List, Union
 from torch.optim.lr_scheduler import _LRScheduler
 
 
@@ -9,9 +9,9 @@ class CustomLRScheduler(_LRScheduler):
 
     Args:
         optimizer (_LRScheduler): Optimizer
-        ini_lr (float): Initial LR
         max_lr (float): Max LR
-        final_lr (float): Final LR
+        ini_lr_div (Union[float, int]): Division factor for initial learning rate
+        final_lr_div (Union[float, int]): Division factor for final learning rate
         n_epochs (int): Number of Epochs
         batches_per_epoch (int): Batches per epoch
         cycle_perct (float): Percentage of total steps (epochs * batches_per_epoch),
@@ -22,8 +22,8 @@ class CustomLRScheduler(_LRScheduler):
         self,
         optimizer: _LRScheduler,
         max_lr: float,
-        ini_lr_div: float,
-        final_lr_div: float,
+        ini_lr_div: Union[float, int],
+        final_lr_div: Union[float, int],
         n_epochs: int,
         batches_per_epoch: int,
         cycle_perct: float,
