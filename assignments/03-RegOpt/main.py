@@ -122,19 +122,20 @@ def compute_accuracy(
     """
     # Set the model to evaluation mode:
     model.eval()
-    # Initialize the number of correct predictions:
-    num_correct = 0
-    # Loop over the data:
-    for x, y in data_loader:
-        # Move the data to the device:
-        x, y = x.to(device), y.to(device)
-        # Forward pass:
-        y_hat = model(x)
-        # Compute the predictions:
-        predictions = torch.argmax(y_hat, dim=1)
-        # Update the number of correct predictions:
-        num_correct += torch.sum(predictions == y).item()
-    # Compute the accuracy:
+    with torch.no_grad():
+        # Initialize the number of correct predictions:
+        num_correct = 0
+        # Loop over the data:
+        for x, y in data_loader:
+            # Move the data to the device:
+            x, y = x.to(device), y.to(device)
+            # Forward pass:
+            y_hat = model(x)
+            # Compute the predictions:
+            predictions = torch.argmax(y_hat, dim=1)
+            # Update the number of correct predictions:
+            num_correct += torch.sum(predictions == y).item()
+        # Compute the accuracy:
     accuracy = num_correct / len(data_loader.dataset)
     # Return the accuracy
     return accuracy
