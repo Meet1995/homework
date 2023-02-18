@@ -7,14 +7,14 @@ from torchvision import transforms
 
 class CONFIG:
     batch_size = 390
-    num_epochs = 17
+    num_epochs = 12
     initial_weight_decay = 1e-5
     batches_per_epoch = int(50000 / batch_size)
     if 50000 % batch_size != 0:
         batches_per_epoch = int(50000 / batch_size) + 1
 
     lrs_kwargs = {
-        "max_lr": 0.0095,
+        "max_lr": 0.009,
         "ini_lr_div": 40,
         "final_lr_div": 500,
         "n_epochs": num_epochs,
