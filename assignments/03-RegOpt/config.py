@@ -19,7 +19,7 @@ class CONFIG:
         "final_lr_div": 700,  # 500,
         "n_epochs": num_epochs,
         "batches_per_epoch": batches_per_epoch,
-        "cycle_perct": 0.927  # 0.985,
+        "cycle_perct": 0.927,  # 0.985,
     }
     initial_learning_rate = lrs_kwargs["max_lr"] / lrs_kwargs["ini_lr_div"]
 
