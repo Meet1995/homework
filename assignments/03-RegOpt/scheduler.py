@@ -16,7 +16,7 @@ class CustomLRScheduler(_LRScheduler):
         batches_per_epoch (int): Batches per epoch
         cycle_perct (float): Percentage of total steps (epochs * batches_per_epoch),
         considered for cycle
-        last_epoch (int, optional): Used to reinitialize scheduler. Defaults to -1.
+        last_epoch (int, optional): Used to reinitialize scheduler. Default is -1.
     """
 
     def __init__(
