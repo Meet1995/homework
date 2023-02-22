@@ -34,6 +34,6 @@ class CONFIG:
     transforms = transforms.Compose(
         [
             transforms.ToTensor(),
-            transforms.Normalize(0.5, 0.5),
+            transforms.Normalize([0.4828, 0.4643, 0.3931], [0.4941, 0.4870, 0.5232]),
         ]
     )
