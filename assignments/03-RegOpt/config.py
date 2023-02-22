@@ -6,20 +6,20 @@ from torchvision import transforms
 
 
 class CONFIG:
-    batch_size = 391  # 413
+    batch_size = 400
     num_epochs = 12
-    initial_weight_decay = 0  # 1e-5
+    initial_weight_decay = 0
     batches_per_epoch = int(50000 / batch_size)
     if 50000 % batch_size != 0:
         batches_per_epoch = int(50000 / batch_size) + 1
 
     lrs_kwargs = {
-        "max_lr": 0.01,  # 0.007,
-        "ini_lr_div": 35,  # 30,
-        "final_lr_div": 700,  # 500,
+        "max_lr": 0.007,
+        "ini_lr_div": 30,
+        "final_lr_div": 500,
         "n_epochs": num_epochs,
         "batches_per_epoch": batches_per_epoch,
-        "cycle_perct": 0.927,  # 0.985,
+        "cycle_perct": 0.985,
     }
     initial_learning_rate = lrs_kwargs["max_lr"] / lrs_kwargs["ini_lr_div"]
 
