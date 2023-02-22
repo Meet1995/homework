@@ -5,7 +5,7 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 class CustomLRScheduler(_LRScheduler):
     """
-    One step policy implementation
+    Custom implementation
 
     Args:
         optimizer (_LRScheduler): Optimizer
