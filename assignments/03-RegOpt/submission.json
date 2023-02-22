@@ -11,6 +11,7 @@
         }
     ],
     "sources": [
-        "https://pytorch.org/docs/stable/index.html"
+        "https://pytorch.org/docs/stable/index.html",
+        "https://kozodoi.me/python/deep%20learning/pytorch/tutorial/2021/03/08/image-mean-std.html"
     ]
 }
