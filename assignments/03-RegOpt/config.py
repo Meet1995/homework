@@ -6,7 +6,7 @@ from torchvision import transforms
 
 
 class CONFIG:
-    batch_size = 400
+    batch_size = 391
     num_epochs = 12
     initial_weight_decay = 0
     batches_per_epoch = int(50000 / batch_size)
@@ -14,12 +14,12 @@ class CONFIG:
         batches_per_epoch = int(50000 / batch_size) + 1
 
     lrs_kwargs = {
-        "max_lr": 0.007,
-        "ini_lr_div": 30,
-        "final_lr_div": 500,
+        "max_lr": 0.01,
+        "ini_lr_div": 35,
+        "final_lr_div": 700,
         "n_epochs": num_epochs,
         "batches_per_epoch": batches_per_epoch,
-        "cycle_perct": 0.985,
+        "cycle_perct": 0.927,
     }
     initial_learning_rate = lrs_kwargs["max_lr"] / lrs_kwargs["ini_lr_div"]
 
