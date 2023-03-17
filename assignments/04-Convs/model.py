@@ -77,7 +77,10 @@ class Model(torch.nn.Module):
             train_data, batch_size=CONFIG.batch_size, shuffle=True
         )
         test_data = CIFAR10(
-            root="data/cifar10", train=False, download=False, transform=CONFIG.transforms
+            root="data/cifar10",
+            train=False,
+            download=False,
+            transform=CONFIG.transforms,
         )
         test_loader = DataLoader(test_data, batch_size=CONFIG.batch_size, shuffle=True)
         return train_loader, test_loader
