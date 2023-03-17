@@ -15,12 +15,12 @@ class BaseModel(torch.nn.Module):
     def __init__(self, num_channels, num_classes):
         super().__init__()
         self.layers = torch.nn.Sequential(
-            torch.nn.Conv2d(num_channels, 16, 3, stride=2, padding=0),
-            torch.nn.MaxPool2d(kernel_size=5, stride=1),
+            torch.nn.Conv2d(num_channels, 16, 5, stride=2, padding=0),
+            torch.nn.MaxPool2d(kernel_size=3, stride=2),
             torch.nn.ReLU(),
             torch.nn.BatchNorm2d(16),
             torch.nn.Flatten(),
-            torch.nn.LazyLinear(num_classes),
+            torch.nn.Linear(576, num_classes),
         )
         self.layers.apply(self._init_weights)
 
@@ -56,7 +56,7 @@ class Model(torch.nn.Module):
     def __pretrain(self):
         criterion = torch.nn.CrossEntropyLoss()
         optimizer = CONFIG.optimizer_factory(self.base_model)
-        train_loader, test_loader = self.__get_cifar10_data()
+        train_loader = self.__get_cifar10_data()
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.base_model.to(device)
         for epoch in range(2):
@@ -76,14 +76,7 @@ class Model(torch.nn.Module):
         train_loader = DataLoader(
             train_data, batch_size=CONFIG.batch_size, shuffle=True
         )
-        test_data = CIFAR10(
-            root="data/cifar10",
-            train=False,
-            download=False,
-            transform=CONFIG.transforms,
-        )
-        test_loader = DataLoader(test_data, batch_size=CONFIG.batch_size, shuffle=True)
-        return train_loader, test_loader
+        return train_loader
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """_summary_
