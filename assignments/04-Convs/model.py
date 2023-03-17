@@ -71,13 +71,13 @@ class Model(torch.nn.Module):
 
     def __get_cifar10_data(self) -> Tuple[DataLoader, DataLoader]:
         train_data = CIFAR10(
-            root="data/cifar10", train=True, download=True, transform=CONFIG.transforms
+            root="data/cifar10", train=True, download=False, transform=CONFIG.transforms
         )
         train_loader = DataLoader(
             train_data, batch_size=CONFIG.batch_size, shuffle=True
         )
         test_data = CIFAR10(
-            root="data/cifar10", train=False, download=True, transform=CONFIG.transforms
+            root="data/cifar10", train=False, download=False, transform=CONFIG.transforms
         )
         test_loader = DataLoader(test_data, batch_size=CONFIG.batch_size, shuffle=True)
         return train_loader, test_loader
