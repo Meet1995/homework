@@ -7,6 +7,7 @@ class Model(torch.nn.Module):
     Args:
         torch (_type_): _description_
     """
+
     def __init__(self, num_channels, num_classes):
         super().__init__()
         self.layers = torch.nn.Sequential(
