@@ -26,7 +26,7 @@ class Model(torch.nn.Module):
         self.layers.apply(self._init_weights)
 
     def _init_weights(self, layer):
-        if isinstance(layer, torch.nn.Conv2d):
+        if isinstance(layer, (torch.nn.Conv2d, torch.nn.Linear)):
             torch.nn.init.kaiming_normal_(layer.weight)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
