@@ -6,7 +6,7 @@ from torchvision import transforms
 
 
 class CONFIG:
-    batch_size = 300
+    batch_size = 256
     num_epochs = 3
 
     optimizer_factory: Callable[
