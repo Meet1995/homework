@@ -158,7 +158,8 @@ def main() -> None:
     )
     toc = time.time()
     print(
-        f"Training time: {toc - tic:.2f} seconds, final accuracy: {compute_accuracy(model, test_loader):.2f}"
+        f"Training time: {toc - tic:.2f} seconds, final accuracy:"
+        f" {compute_accuracy(model, test_loader):.2f}"
     )
 
 

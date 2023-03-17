@@ -2,11 +2,15 @@
     "assignment_name": "Convolutions",
     "contributors": [
         {
-            "name": "Change this to your name",
-            "pennkey": "MyPennKey"
+            "name": "Meet Gandhi",
+            "pennkey": "mgandhi5"
+        },
+        {
+            "name": "Shikha Reddy",
+            "pennkey": "shikham"
         }
     ],
     "sources": [
-        "Don't forget to list your sources/attribution here!"
+        "https://pytorch.org/docs/stable/index.html"
     ]
 }
