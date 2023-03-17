@@ -6,8 +6,8 @@ from torchvision import transforms
 
 
 class CONFIG:
-    batch_size = 1024
-    num_epochs = 10
+    batch_size = 512
+    num_epochs = 3
 
     optimizer_factory: Callable[
         [nn.Module], torch.optim.Optimizer
