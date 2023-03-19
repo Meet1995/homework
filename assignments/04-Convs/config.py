@@ -6,12 +6,12 @@ from torchvision import transforms
 
 
 class CONFIG:
-    batch_size = 300
-    num_epochs = 3
+    batch_size = 128
+    num_epochs = 4
 
     optimizer_factory: Callable[
         [nn.Module], torch.optim.Optimizer
-    ] = lambda model: torch.optim.Adam(model.parameters(), lr=2e-2)
+    ] = lambda model: torch.optim.Adam(model.parameters(), lr=0.007)
 
     transforms = transforms.Compose(
         [

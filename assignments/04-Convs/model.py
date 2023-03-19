@@ -10,24 +10,23 @@ class Model(torch.nn.Module):
 
     def __init__(self, num_channels, num_classes):
         super().__init__()
-        n_chn1 = 64
-        n_chn2 = 128
         self.layers = torch.nn.Sequential(
-            torch.nn.Conv2d(num_channels, n_chn1, 3, stride=2, bias=False),
+            torch.nn.Conv2d(num_channels, 32, 5, stride=1, padding=0),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(n_chn1),
-            torch.nn.Conv2d(n_chn1, n_chn2, 3, stride=2, bias=False),
+            torch.nn.BatchNorm2d(32),
+            torch.nn.Conv2d(32, 16, 3, stride=2, padding=0),
             torch.nn.MaxPool2d(kernel_size=3, stride=1),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(n_chn2),
-            torch.nn.Conv2d(n_chn2, 10, 5, stride=1),
+            torch.nn.BatchNorm2d(16),
             torch.nn.Flatten(),
+            torch.nn.LazyLinear(num_classes),
         )
         self.layers.apply(self._init_weights)
 
     def _init_weights(self, layer):
-        if isinstance(layer, (torch.nn.Conv2d, torch.nn.Linear)):
-            torch.nn.init.kaiming_normal_(layer.weight)
+        if isinstance(layer, torch.nn.Conv2d):
+            torch.nn.init.xavier_uniform_(layer.weight)
+            torch.nn.init.zeros_(layer.bias)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """_summary_
