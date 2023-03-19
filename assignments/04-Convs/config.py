@@ -6,6 +6,8 @@ from torchvision import transforms
 
 
 class CONFIG:
+    batch_size = 256
+    num_epochs = 3
     batch_size = 128
     num_epochs = 4
 
