@@ -11,15 +11,16 @@ class Model(torch.nn.Module):
     def __init__(self, num_channels, num_classes):
         super().__init__()
         self.layers = torch.nn.Sequential(
-            torch.nn.Conv2d(num_channels, 32, 5, stride=1, padding=0),
+            torch.nn.Conv2d(num_channels, 16, 3, stride=2),
             torch.nn.ReLU(),
-            torch.nn.BatchNorm2d(32),
-            torch.nn.Conv2d(32, 16, 3, stride=2, padding=0),
-            torch.nn.MaxPool2d(kernel_size=3, stride=1),
-            torch.nn.ReLU(),
+            torch.nn.MaxPool2d(kernel_size=2, stride=2),
             torch.nn.BatchNorm2d(16),
+            # torch.nn.Conv2d(32, 16, 3, stride=2, padding=0),
+            # torch.nn.ReLU(),
+            # torch.nn.BatchNorm2d(16),
             torch.nn.Flatten(),
-            torch.nn.LazyLinear(num_classes),
+            torch.nn.LazyLinear(128),
+            torch.nn.Linear(128, num_classes),
         )
         self.layers.apply(self._init_weights)
 
