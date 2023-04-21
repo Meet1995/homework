@@ -2,11 +2,16 @@
     "assignment_name": "RL",
     "contributors": [
         {
-            "name": "Change this to your name",
-            "pennkey": "MyPennKey"
+            "name": "Meet Gandhi",
+            "pennkey": "mgandhi5"
+        },
+        {
+            "name": "Shikha Reddy",
+            "pennkey": "shikham"
         }
     ],
     "sources": [
-        "Don't forget to list your sources/attribution here!"
+        "https://github.com/openai/gym/blob/master/gym/envs/box2d/lunar_lander.py",
+        "https://gymnasium.farama.org/environments/box2d/lunar_lander/"
     ]
 }
